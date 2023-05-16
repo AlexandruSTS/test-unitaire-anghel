@@ -3,6 +3,7 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -57,5 +58,25 @@ class ServiceTest {
         int actual = underTest.calculate(operation, a, b);
         //then
         assertEquals(expected, actual);
+    }
+    @Test
+    public void ArgumentShouldBeString(){
+        //given
+        int a = 5;
+        int b = 6;
+        String operation = "add";
+        //when
+        underTest.calculate(operation, a, b);
+        //then
+        ArgumentCaptor<Integer> argumentCaptorA = ArgumentCaptor.forClass(Integer.class);
+        ArgumentCaptor<Integer> argumentCaptorB = ArgumentCaptor.forClass(Integer.class);
+
+        verify(calculator).add(argumentCaptorA.capture(), argumentCaptorB.capture());
+
+        int capturedA = argumentCaptorA.getValue();
+        int capturedB = argumentCaptorB.getValue();
+        
+        assertEquals(a, capturedA);
+        assertEquals(b, capturedB);
     }
 }

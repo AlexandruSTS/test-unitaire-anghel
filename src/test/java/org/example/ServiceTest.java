@@ -75,7 +75,7 @@ class ServiceTest {
 
         int capturedA = argumentCaptorA.getValue();
         int capturedB = argumentCaptorB.getValue();
-        
+
         assertEquals(a, capturedA);
         assertEquals(b, capturedB);
     }

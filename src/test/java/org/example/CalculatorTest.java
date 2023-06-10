@@ -16,6 +16,7 @@ public class CalculatorTest {
         //then
         int expected = 5;
         assertEquals(expected, result);
+        //test comment
     }
 
     @Test
